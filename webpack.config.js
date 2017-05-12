@@ -28,7 +28,7 @@ const plugins = [
     hash: true,
     path: docsPath
   })
-]
+];
 
 if (process.env.NODE_ENV === 'production') {
   plugins.push(new webpack.optimize.UglifyJsPlugin());
