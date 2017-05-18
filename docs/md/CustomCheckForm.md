@@ -33,9 +33,7 @@ const CustomCheckForm = React.createClass({
   getInitialState() {
     return {
       values: {
-        name: 'abc',
-        skills: [2, 3],
-        status: 0
+        name: 'abc'
       },
       errors: {}
     };

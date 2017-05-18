@@ -2,7 +2,7 @@
 
 名称             | 类型             | 默认值   | 描述
 --------------------- | ----------------- | ----- |
-horizontal            | bool             |        |  设置表单内的元素横向左右布局
+horizontal            | bool             |        |  设置表单内的元素左右亮栏布局
 inline                | bool             |       |  设置表单内元素在一行布局
 values                | object           |       |  表单的值 `受控组件`
 defaultValues         | object           |       |  表单的初始默认值 `非受控组件`

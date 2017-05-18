@@ -11,7 +11,7 @@ import { Form, Field, createFormControl } from 'form-lib';
 import { SchemaModel, StringType, ArrayType } from 'rsuite-schema';
 import {
   FormControl, Button, FormGroup,
-  ControlLabel, HelpBlock, CheckboxList, Checkbox
+  ControlLabel, HelpBlock, CheckboxGroup, Checkbox
 } from 'rsuite';
 
 const model = SchemaModel({
@@ -82,7 +82,7 @@ const RSuiteForm = React.createClass({
           <CustomField
             name="skills"
             label="技能"
-            accepter={CheckboxList}
+            accepter={CheckboxGroup}
             errors={errors['skills']}
           >
             <Checkbox value={1}>Node.js</Checkbox>

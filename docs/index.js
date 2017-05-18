@@ -30,8 +30,8 @@ const App = React.createClass({
             <Navbar.Collapse>
 
               <Nav pullRight>
-                <Nav.Item href="https://rsuite.github.io">RSuite</Nav.Item>
-                <Nav.Item href="https://github.com/rsuite/rsuite-form">GitHub</Nav.Item>
+                <Nav.Item href="https://rsuitejs.com">RSuite</Nav.Item>
+                <Nav.Item href="https://github.com/rsuite/form-lib">GitHub</Nav.Item>
               </Nav>
             </Navbar.Collapse>
           </div>
