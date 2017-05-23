@@ -55,8 +55,8 @@ class Form extends React.Component {
       values: props.values || {}
     };
     this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.handleFieldError = this.handleFieldError.bind(this);
-    this.handleFieldSuccess = this.handleFieldSuccess.bind(this);
+    this.handleFieldError = debounce(this.handleFieldError.bind(this), props.checkDelay);
+    this.handleFieldSuccess = debounce(this.handleFieldSuccess.bind(this),props.checkDelay);
     this.check = this.check.bind(this);
   }
 
@@ -75,13 +75,13 @@ class Form extends React.Component {
   }
 
   getChildContext() {
-    const { defaultValues, model, checkDelay, checkTrigger } = this.props;
+    const { defaultValues, model, checkTrigger } = this.props;
     const { errors, values } = this.state;
     return {
       _form: {
         onFieldChange: this.handleFieldChange,
-        onFieldError: debounce(this.handleFieldError, checkDelay),
-        onFieldSuccess: debounce(this.handleFieldSuccess, checkDelay),
+        onFieldError: this.handleFieldError,
+        onFieldSuccess: this.handleFieldSuccess,
         checkTrigger,
         values,
         defaultValues,
@@ -126,6 +126,7 @@ class Form extends React.Component {
    * 验证，出现错误的回调函数
    */
   handleFieldError(name, error) {
+
 
     const { onError, onCheck } = this.props;
     const errors = Object.assign({}, this.state.errors, {
