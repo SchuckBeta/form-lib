@@ -56,7 +56,7 @@ class Form extends React.Component {
     };
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleFieldError = debounce(this.handleFieldError.bind(this), props.checkDelay);
-    this.handleFieldSuccess = debounce(this.handleFieldSuccess.bind(this),props.checkDelay);
+    this.handleFieldSuccess = debounce(this.handleFieldSuccess.bind(this), props.checkDelay);
     this.check = this.check.bind(this);
   }
 
@@ -103,7 +103,7 @@ class Form extends React.Component {
     let errorCount = 0;
 
     const nextValues = Object.assign({}, defaultValues, values);
-    Object.keys(nextValues).forEach(key => {
+    Object.keys(model.schema).forEach(key => {
       const checkResult = model.checkForField(key, nextValues[key]);
 
       if (checkResult.hasError === true) {
