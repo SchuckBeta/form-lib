@@ -90,6 +90,14 @@ const RSuiteForm = React.createClass({
             <Checkbox value={3}>CSS 3</Checkbox>
           </CustomField>
 
+          <CustomField
+            name="bio"
+            label="简介"
+            accepter={FormControl}
+            componentClass="textarea"
+            error={errors['bio']}
+          />
+
           <Button shape='primary' onClick={this.handleSubmit}> 提交 </Button>
         </Form>
       </div>
