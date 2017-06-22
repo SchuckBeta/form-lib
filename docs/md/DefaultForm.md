@@ -8,7 +8,7 @@ import React from 'react';
 import { Form, Field, createFormControl } from 'form-lib';
 import { SchemaModel, StringType } from 'rsuite-schema';
 
-const TextField = createFormControl('input');
+const TextareaField = createFormControl('textarea');
 const SelectField = createFormControl('select');
 
 const model = SchemaModel({
@@ -44,7 +44,7 @@ const DefaultForm = React.createClass({
             console.log(errors);
             this.setState({ errors });
           }}
-          defaultValues={values}
+          values={values}
           model={model} >
 
           <div className="form-group">
@@ -62,6 +62,12 @@ const DefaultForm = React.createClass({
               <option value={0}>禁用</option>
             </Field>
           </div>
+
+          <div className="form-group">
+            <label>描述 </label>
+            <Field name="description" className='form-control' accepter={TextareaField} />
+          </div>
+
           <button onClick={this.handleSubmit}> 提交 </button>
         </Form>
       </div>
