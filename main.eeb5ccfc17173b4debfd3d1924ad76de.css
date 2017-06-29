@@ -1,4 +1,4 @@
-/*! Last update: Thu Jun 22 2017 14:33:16 GMT+0800 (CST) */
+/*! Last update: Thu Jun 29 2017 12:58:25 GMT+0800 (CST) */
 @charset "utf-8";
 /**灰色色阶为公用颜色**/
 /**主题**/
@@ -49,11 +49,11 @@
   overflow: hidden;
 }
 .rsuite-Picker.cascade.expand .toggle {
-  padding: 7px 26px 7px 26px;
+  padding: 7px 26px 7px 18px;
 }
 .rsuite-Picker.cascade.expand.rsuite-Picker--dropup .toggle {
   border-top-width: 1px;
-  padding: 7px 26px 7px 26px;
+  padding: 7px 26px 7px 18px;
 }
 .rsuite-Picker.cascade.expand.rsuite-Picker--dropup .toggle .toggle-arrow {
   top: 14px;
@@ -85,6 +85,23 @@
 }
 .rsuite-Picker.cascade .cascader-menu:last-child {
   border-right-color: #DCDCDC;
+}
+.rsuite-Picker.cascade .toggle-placeholder {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+.rsuite-Picker.cascade .toggle-placeholder .label-path {
+  margin-left: 2px;
+}
+.rsuite-Picker.cascade .toggle-placeholder .label-path:after {
+  content: ">";
+  margin: 0 6px;
+}
+.rsuite-Picker.cascade .toggle-placeholder .label-path:last-child:after {
+  content: '';
 }
 .rsuite-Picker.cascade .has-children {
   position: relative;
@@ -159,7 +176,7 @@
   background-color: #FFF;
   color: #333;
   border: 1px solid #CCC;
-  padding: 7px 26px 7px 26px;
+  padding: 7px 26px 7px 18px;
   cursor: pointer;
   outline: none;
   width: 100%;
@@ -187,12 +204,12 @@
   background: #FFF !important;
   border-color: #DCDCDC !important;
   border-bottom-width: 0;
-  padding: 7px 26px 8px 26px;
+  padding: 7px 26px 8px 18px;
 }
 .rsuite-Picker.expand.rsuite-Picker--dropup .toggle {
   border-top-width: 0;
   border-bottom-width: 1px;
-  padding: 8px 26px 7px 26px;
+  padding: 8px 26px 7px 18px;
 }
 .rsuite-Picker.expand.rsuite-Picker--dropup .toggle-arrow {
   top: 15px;
@@ -900,21 +917,26 @@ th {
     border: 1px solid #ddd !important;
   }
 }
-.icon-lg {
+.icon-lg,
+.icon-lg.icon {
   font-size: 1.33333333em;
   line-height: 0.75em;
   vertical-align: -15%;
 }
-.icon-2x {
+.icon-2x,
+.icon-2x.icon {
   font-size: 2em;
 }
-.icon-3x {
+.icon-3x,
+.icon-3x.icon {
   font-size: 3em;
 }
-.icon-4x {
+.icon-4x,
+.icon-4x.icon {
   font-size: 4em;
 }
-.icon-5x {
+.icon-5x,
+.icon-5x.icon {
   font-size: 5em;
 }
 .icon-fw {
@@ -1033,7 +1055,8 @@ th {
 :root .icon-flip-vertical {
   filter: none;
 }
-.icon-stack {
+.icon-stack,
+.icon-stack.icon {
   position: relative;
   display: inline-block;
   width: 2em;
@@ -1042,19 +1065,24 @@ th {
   vertical-align: middle;
 }
 .icon-stack-1x,
-.icon-stack-2x {
+.icon-stack-2x,
+.icon-stack-1x.icon,
+.icon-stack-2x.icon {
   position: absolute;
   left: 0;
   width: 100%;
   text-align: center;
 }
-.icon-stack-1x {
+.icon-stack-1x,
+.icon-stack-1x.icon {
   line-height: inherit;
 }
-.icon-stack-2x {
+.icon-stack-2x,
+.icon-stack-2x.icon {
   font-size: 2em;
 }
-.icon-inverse {
+.icon-inverse,
+.icon-inverse.icon {
   color: #fff;
 }
 .sr-only {
@@ -1087,13 +1115,12 @@ th {
 }
 @font-face {
   font-family: 'RSuiteIconFont';
-  src: url(./resources/bfcfa3af716f308d8c1ac5782fd7455f.eot);
-  src: url(./resources/bfcfa3af716f308d8c1ac5782fd7455f.eot?#iefix) format('eot'), url(./resources/fb4454d75f63b114e61d35f36e03d291.ttf) format('truetype'), url(./resources/2d31f748b328038fdf42d1c3355ef4e8.woff) format('woff'), url(./resources/76c68a158d323b270ddbb4448a6c75bf.svg#RSuiteIconFont) format('svg');
+  src: url(./resources/d979022a318666f254c915b4dbb7668d.eot);
+  src: url(./resources/d979022a318666f254c915b4dbb7668d.eot?#iefix) format('eot'), url(./resources/5521c539808c49ec89ce12b623da369f.ttf) format('truetype'), url(./resources/2c3312c1cdc6b8f61bab55797ad4f960.woff) format('woff'), url(./resources/2b09ee6ce506f69479f5f419461c6f2e.svg#RSuiteIconFont) format('svg');
   font-weight: normal;
   font-style: normal;
 }
 .icon {
-  font: normal normal normal 14px/1 'RSuiteIconFont';
   font-family: 'RSuiteIconFont' !important;
   speak: none;
   font-style: normal;
@@ -1101,6 +1128,8 @@ th {
   font-variant: normal;
   display: inline-block;
   text-transform: none;
+  font-size: 14px;
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -7304,7 +7333,7 @@ tbody.collapse.in {
   z-index: 4;
   background: none;
   border: none;
-  padding: 9px 13px 8px 13px;
+  padding: 11px 13px 8px 13px;
   width: auto;
 }
 .input-group.input-group-inside .input-group-addon ~ input.form-control {
