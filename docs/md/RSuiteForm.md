@@ -91,6 +91,17 @@ const RSuiteForm = React.createClass({
           </CustomField>
 
           <CustomField
+            name="gender"
+            label="性别"
+            accepter={RadioGroup}
+            error={errors['gender']}
+          >
+            <Radio value={1}>男</Radio>
+            <Radio value={2}>女</Radio>
+            <Radio value={3}>未知</Radio>
+          </CustomField>
+
+          <CustomField
             name="bio"
             label="简介"
             accepter={FormControl}
