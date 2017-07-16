@@ -1,4 +1,4 @@
-/*! Last update: Thu Jun 29 2017 12:58:25 GMT+0800 (CST) */
+/*! Last update: Sun Jul 16 2017 12:33:10 GMT+0800 (CST) */
 @charset "utf-8";
 /**灰色色阶为公用颜色**/
 /**主题**/
@@ -5676,8 +5676,8 @@ div.checker {
 div.checker,
 div.checker span,
 div.checker input {
-  width: 19px;
-  height: 19px;
+  width: 18px;
+  height: 18px;
 }
 div.checker input {
   opacity: 0;
