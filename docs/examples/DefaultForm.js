@@ -33,25 +33,28 @@ const DefaultForm = React.createClass({
       <div>
         <Form
           ref={ref => this.form = ref}
-          onChange={(values) => this.setState({ values })}
-          onCheck={errors => {
-            console.log(errors);
+          onChange={(values) => {
+            this.setState({ values });
+            console.log(values, 'values');
+          }}
+          onCheck={(errors) => {
+            console.log(errors, 'errors');
             this.setState({ errors });
           }}
           values={values}
-          model={model} >
-
+          model={model}
+        >
           <div className="form-group">
             <label>邮箱: </label>
-            <Field name="name" className='form-control'  />
+            <Field name="name" className="form-control" />
             <span className="help-block error" style={{ color: '#ff0000' }}>
-              {errors['name']}
+              {errors.name}
             </span>
           </div>
 
           <div className="form-group">
             <label>状态: </label>
-            <Field name="status" className='form-control' accepter={SelectField} >
+            <Field name="status" className="form-control" accepter={SelectField} >
               <option value={1}>启用</option>
               <option value={0}>禁用</option>
             </Field>
@@ -59,7 +62,7 @@ const DefaultForm = React.createClass({
 
           <div className="form-group">
             <label>描述 </label>
-            <Field name="description" className='form-control' accepter={TextareaField} />
+            <Field name="description" className="form-control" accepter={TextareaField} />
           </div>
 
           <button onClick={this.handleSubmit}> 提交 </button>

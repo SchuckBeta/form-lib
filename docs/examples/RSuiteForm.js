@@ -8,6 +8,7 @@ const model = SchemaModel({
   skills: ArrayType().minLength(1, '至少应该会一个技能')
 });
 
+
 const CustomField = ({ name, label, accepter, error, ...props }) => (
   <FormGroup className={error ? 'has-error' : ''}>
     <ControlLabel>{label} </ControlLabel>
