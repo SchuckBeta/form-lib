@@ -1,4 +1,4 @@
 export Form from './Form';
 export Field from './Field';
-export createFormControl  from './createFormControl';
+export createFormControl from './createFormControl';
 

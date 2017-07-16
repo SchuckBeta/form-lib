@@ -1,10 +1,8 @@
-import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
-import classNames from 'classnames';
-import Field from './Field.js';
 import { SchemaModel, Schema } from 'rsuite-schema';
-import debounce from './utils/debounce';
+import classNames from 'classnames';
 
 const propTypes = {
   horizontal: PropTypes.bool,
@@ -55,9 +53,25 @@ class Form extends React.Component {
       values: props.values || {}
     };
     this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.handleFieldError = debounce(this.handleFieldError.bind(this), props.checkDelay);
-    this.handleFieldSuccess = debounce(this.handleFieldSuccess.bind(this), props.checkDelay);
+    this.handleFieldError = _.debounce(this.handleFieldError.bind(this), props.checkDelay);
+    this.handleFieldSuccess = _.debounce(this.handleFieldSuccess.bind(this), props.checkDelay);
     this.check = this.check.bind(this);
+  }
+  getChildContext() {
+    const { defaultValues, model, checkTrigger } = this.props;
+    const { errors, values } = this.state;
+    return {
+      form: {
+        onFieldChange: this.handleFieldChange,
+        onFieldError: this.handleFieldError,
+        onFieldSuccess: this.handleFieldSuccess,
+        checkTrigger,
+        values,
+        defaultValues,
+        errors,
+        model
+      }
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,24 +87,6 @@ class Form extends React.Component {
       });
     }
   }
-
-  getChildContext() {
-    const { defaultValues, model, checkTrigger } = this.props;
-    const { errors, values } = this.state;
-    return {
-      _form: {
-        onFieldChange: this.handleFieldChange,
-        onFieldError: this.handleFieldError,
-        onFieldSuccess: this.handleFieldSuccess,
-        checkTrigger,
-        values,
-        defaultValues,
-        errors,
-        model
-      }
-    };
-  }
-
   /**
    * 校验表单数据是否合法
    * 该方法主要提供给 Form ref 时候调用
@@ -103,11 +99,11 @@ class Form extends React.Component {
     let errorCount = 0;
 
     const nextValues = Object.assign({}, defaultValues, values);
-    Object.keys(model.schema).forEach(key => {
+    Object.keys(model.schema).forEach((key) => {
       const checkResult = model.checkForField(key, nextValues[key]);
 
       if (checkResult.hasError === true) {
-        errorCount++;
+        errorCount += 1;
         errors[key] = checkResult.errorMessage;
       }
     });
@@ -165,21 +161,24 @@ class Form extends React.Component {
   render() {
 
     const {
-      children,
-      model,
       horizontal,
       inline,
-      className
+      className,
+      children
     } = this.props;
 
-    const clesses = classNames({
-      'form': true,
+    const clesses = classNames('form', {
       'form-horizontal': horizontal,
       'form-inline': inline
     }, className);
 
     return (
-      <form onSubmit={(e) => e.preventDefault()} className={clesses}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        className={clesses}
+      >
         {children}
       </form>
     );
@@ -189,7 +188,7 @@ class Form extends React.Component {
 Form.defaultProps = defaultProps;
 Form.propTypes = propTypes;
 Form.childContextTypes = {
-  _form: PropTypes.object.isRequired
+  form: PropTypes.object.isRequired
 };
 
 export default Form;

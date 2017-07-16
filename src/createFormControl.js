@@ -1,57 +1,131 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import { isChrome, isFirefox, isSafari, isIE, isEdge, isOpera } from './utils/BrowserDetection';
+
+function isTextField(target) {
+  return (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement);
+}
+
 
 function createFormControl(Component) {
 
-  const isChrome = !!window.chrome && !!window.chrome.webstore;
+  // if now is in composition session
   let isOnComposition = false;
 
+  // for safari use only, innervalue can't setState when compositionend occurred
+  let isInnerChangeFromOnChange = false;
 
-  return class extends React.Component {
+  const propTypes = {
+    value: PropTypes.any,
+    defaultValue: PropTypes.any,
+    onChange: PropTypes.func
+  };
 
+  class FormControl extends React.Component {
 
     constructor(props, context) {
       super(props, context);
+      const value = props.value || props.defaultValue || '';
+      this.state = {
+        inputValue: value,
+        innerValue: value,
+      };
       this.handleChange = this.handleChange.bind(this);
       this.handleComposition = this.handleComposition.bind(this);
     }
 
-    handleComposition(e) {
-      const { onChange } = this.props;
-      if (e.type === 'compositionend') {
-        // composition is end
-        isOnComposition = false;
-        /**
-         * fixed for Chrome v53+ and detect all Chrome
-         * https://chromium.googlesource.com/chromium/src/afce9d93e76f2ff81baaa088a4ea25f67d1a76b3%5E%21/
-         */
-
-        if (e.target instanceof HTMLInputElement && !isOnComposition && isChrome) {
-          // fire onChange
-          onChange && onChange(e.target.value);
-        }
-      } else {
-        // in composition
-        isOnComposition = true;
+    componentWillReceiveProps(nextProps) {
+      if (!_.isEqual(nextProps.value, this.props.value)) {
+        this.state = {
+          inputValue: nextProps.value,
+          innerValue: nextProps.value,
+        };
       }
     }
 
     handleChange(e) {
-      const { onChange = () => { } } = this.props;
-      const isInput = (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement);
-      const value = e.target.value;
 
-      if (isInput && !isOnComposition) {
+      const { onChange = () => { } } = this.props;
+      const value = e.target.value;
+      // Flow check
+      if (!isTextField(e.target)) {
         onChange(value);
-      } else if (!isInput) {
-        onChange(value);
+        return;
       }
 
-      isOnComposition = false;
 
+      if (isInnerChangeFromOnChange) {
+        this.setState({
+          inputValue: value,
+          innerValue: value
+        });
+        onChange(value);
+        isInnerChangeFromOnChange = false;
+        return;
+      }
+
+      // when is on composition, change inputValue only
+      // when not in composition change inputValue and innerValue both
+      if (!isOnComposition) {
+        this.setState({
+          inputValue: value,
+          innerValue: value,
+        });
+        onChange(value);
+      } else {
+        this.setState({ inputValue: value });
+      }
+    }
+
+    handleComposition(e) {
+
+      const { onChange = () => { } } = this.props;
+
+      // Flow check
+      if (!isTextField(e.target)) {
+        return;
+      }
+
+      if (e.type === 'compositionend') {
+
+        const value = e.target.value;
+        // Chrome is ok for only setState innerValue
+        // Opera, IE and Edge is like Chrome
+        if (isChrome || isIE || isEdge || isOpera) {
+          this.setState({ innerValue: value });
+          onChange(value);
+        }
+
+        // Firefox need to setState inputValue again...
+        if (isFirefox) {
+          this.setState({
+            innerValue: value,
+            inputValue: value
+          });
+          onChange(value);
+        }
+
+        // Safari think e.target.value in composition event is keyboard char,
+        //  but it will fired another change after compositionend
+        if (isSafari) {
+          // do change in the next change event
+          isInnerChangeFromOnChange = true;
+        }
+
+        isOnComposition = false;
+      } else {
+        isOnComposition = true;
+      }
     }
 
     render() {
-      const { className, ...props } = this.props;
+      const { className, value, ...props } = this.props;
+
+      if (!_.isUndefined(value)) {
+        props.value = this.state.inputValue;
+      }
+
       return (
         <Component
           {...props}
@@ -63,7 +137,12 @@ function createFormControl(Component) {
         />
       );
     }
-  };
+  }
+
+  FormControl.propTypes = propTypes;
+  FormControl.displayName = 'FormControlField';
+
+  return FormControl;
 }
 
 export default createFormControl;

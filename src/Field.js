@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from './utils/elementType';
 import createFormControl from './createFormControl';
 
@@ -16,7 +16,7 @@ class Field extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    if (!context._form) {
+    if (!context.form) {
       throw new Error('Field must be inside a component decorated with <Form>');
     }
 
@@ -24,7 +24,7 @@ class Field extends React.Component {
       throw new Error(' `name` is undefined on <Field>');
     }
 
-    const { values = {}, defaultValues = {} } = context._form;
+    const { values = {}, defaultValues = {} } = context.form;
     const name = props.name;
 
     this.state = {
@@ -40,7 +40,7 @@ class Field extends React.Component {
   handleFieldChange(value) {
 
     const { name } = this.props;
-    const { onFieldChange, checkTrigger } = this.context._form;
+    const { onFieldChange, checkTrigger } = this.context.form;
     const checkResult = this.handleFieldCheck(value, checkTrigger === 'change');
 
     this.setState({ checkResult, value });
@@ -49,8 +49,7 @@ class Field extends React.Component {
   }
 
   handleFieldBlur() {
-    const { name } = this.props;
-    const { checkTrigger } = this.context._form;
+    const { checkTrigger } = this.context.form;
     this.handleFieldCheck(this.state.value, checkTrigger === 'blur');
   }
 
@@ -60,7 +59,7 @@ class Field extends React.Component {
       onFieldError,
       onFieldSuccess,
       model
-    } = this.context._form;
+    } = this.context.form;
 
 
     const checkResult = model.checkForField(name, value);
@@ -77,19 +76,19 @@ class Field extends React.Component {
   }
 
   render() {
-    const { name, accepter: Component, ...props } = this.props;
-    const { values = {}, defaultValues = {} } = this.context._form;
+    let { name, accepter: Component, ...props } = this.props;
+    const { values = {}, defaultValues = {} } = this.context.form;
     const { checkResult } = this.state;
 
     return (
       <Component
+        {...props}
         onChange={this.handleFieldChange}
         onBlur={this.handleFieldBlur}
         errorMessage={checkResult.errorMessage}
         isValid={checkResult.hasError === undefined ? undefined : !checkResult.hasError}
         defaultValue={defaultValues[name]}
         value={values[name]}
-        { ...props }
       />
     );
   }
@@ -98,7 +97,7 @@ class Field extends React.Component {
 Field.defaultProps = defaultProps;
 Field.propTypes = propTypes;
 Field.contextTypes = {
-  _form: PropTypes.object
+  form: PropTypes.object
 };
 
 export default Field;
