@@ -5,6 +5,8 @@ import createFormControl from './createFormControl';
 
 const propTypes = {
   name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
   accepter: elementType
 };
 
@@ -20,9 +22,6 @@ class Field extends React.Component {
       throw new Error('Field must be inside a component decorated with <Form>');
     }
 
-    if (!props.name) {
-      throw new Error(' `name` is undefined on <Field>');
-    }
 
     const { values = {}, defaultValues = {} } = context.form;
     const name = props.name;
@@ -37,20 +36,23 @@ class Field extends React.Component {
   }
 
 
-  handleFieldChange(value) {
+  handleFieldChange(value, event) {
 
-    const { name } = this.props;
+    const { name, onChange } = this.props;
     const { onFieldChange, checkTrigger } = this.context.form;
     const checkResult = this.handleFieldCheck(value, checkTrigger === 'change');
 
     this.setState({ checkResult, value });
-    onFieldChange(name, value, checkResult);
+    onFieldChange(name, value, checkResult, event);
+    onChange && onChange(value, event);
 
   }
 
-  handleFieldBlur() {
+  handleFieldBlur(event) {
+    const { onBlur } = this.props;
     const { checkTrigger } = this.context.form;
     this.handleFieldCheck(this.state.value, checkTrigger === 'blur');
+    onBlur && onBlur(event);
   }
 
   handleFieldCheck(value, isCheckTrigger) {
@@ -78,15 +80,13 @@ class Field extends React.Component {
   render() {
     let { name, accepter: Component, ...props } = this.props;
     const { values = {}, defaultValues = {} } = this.context.form;
-    const { checkResult } = this.state;
 
     return (
       <Component
         {...props}
+        name={name}
         onChange={this.handleFieldChange}
         onBlur={this.handleFieldBlur}
-        errorMessage={checkResult.errorMessage}
-        isValid={checkResult.hasError === undefined ? undefined : !checkResult.hasError}
         defaultValue={defaultValues[name]}
         value={values[name]}
       />

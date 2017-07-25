@@ -126,10 +126,11 @@ function createFormControl(Component) {
         props.value = this.state.inputValue;
       }
 
+
       return (
         <Component
           {...props}
-          className={`form-control ${className}`}
+          className={`form-control ${className || ''}`}
           onCompositionStart={this.handleComposition}
           onCompositionUpdate={this.handleComposition}
           onCompositionEnd={this.handleComposition}

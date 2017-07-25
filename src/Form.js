@@ -164,7 +164,7 @@ class Form extends React.Component {
       horizontal,
       inline,
       className,
-      children
+      ...props
     } = this.props;
 
     const clesses = classNames('form', {
@@ -172,15 +172,16 @@ class Form extends React.Component {
       'form-inline': inline
     }, className);
 
+    const elementProps = _.omit(props, Object.keys(propTypes));
+
     return (
       <form
+        {...elementProps}
         onSubmit={(e) => {
           e.preventDefault();
         }}
         className={clesses}
-      >
-        {children}
-      </form>
+      />
     );
   }
 }
