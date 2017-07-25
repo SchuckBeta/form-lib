@@ -1,10 +1,12 @@
 import React from 'react';
-import { Form, Field, createFormControl } from '../../src';
-import { SchemaModel, StringType, ArrayType } from 'rsuite-schema';
+import { Form, Field } from '../../src';
+import { SchemaModel, StringType } from 'rsuite-schema';
 import { FormControl, Button, FormGroup, ControlLabel, HelpBlock } from 'rsuite';
 
 const model = SchemaModel({
-  name: StringType().isEmail('请输入正确的邮箱')
+  name: StringType().addRule((value) => {
+    return /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value);
+  }, '请输入正确的邮箱')
 });
 
 const CustomField = ({ name, label, accepter, error, ...props }) => (
@@ -42,18 +44,20 @@ const CustomCheckForm = React.createClass({
             this.setState({ values });
             console.log(values);
           }}
-          onCheck={errors => this.setState({ errors })}
+          onCheck={(errors) => {
+            this.setState({ errors });
+          }}
           defaultValues={values}
           model={model}
-          checkTrigger='blur'
-          >
+          checkTrigger="blur"
+        >
           <CustomField
             name="name"
             label="邮箱"
             accepter={FormControl}
-            error={errors['name']}
+            error={errors.name}
           />
-          <Button shape='primary' onClick={this.handleSubmit}> 提交 </Button>
+          <Button shape="primary" onClick={this.handleSubmit}> 提交 </Button>
         </Form>
       </div>
     );
