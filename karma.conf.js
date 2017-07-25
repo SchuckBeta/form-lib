@@ -1,35 +1,46 @@
-var webpack = require('webpack');
-
-module.exports = function(config) {
-    config.set({
-        browsers: ['Chrome'],
-        singleRun: true,
-        color: true,
-        frameworks: ['mocha'],
-        files: [
-            'tests.webpack.js'
-        ],
-        preprocessors: {
-            'tests.webpack.js': ['webpack', 'sourcemap']
-        },
-        reporters: ['mocha'],
-        webpack: {
-            devtool: 'inline-source-map',
-            module: {
-                loaders: [
-                {
-                    exclude: /node_modules/,
-                    test: /\.jsx?$/,
-                    loader: 'babel',
-                    query: {
-                        presets: ['es2015', 'stage-0', 'react']
-                    }
-                }
-                ]
-            }
-        },
-        webpackServer: {
-            noInfo: true
-        }
-    });
+const webpackConfig = {
+  output: {
+    pathinfo: true
+  },
+  module: {
+    rules: [{
+      test: /\.jsx?$/,
+      use: [
+        'babel-loader'
+      ],
+      exclude: /node_modules/
+    }]
+  },
+  devtool: 'eval'
 };
+
+module.exports = (config) => {
+  const { env } = process;
+  config.set({
+    basePath: '',
+    files: ['test/index.js'],
+    frameworks: [
+      'mocha',
+      'sinon-chai'
+    ],
+    colors: true,
+    reporters: ['mocha'],
+
+    logLevel: config.LOG_INFO,
+    preprocessors: {
+      'test/index.js': ['webpack'],
+    },
+    webpack: webpackConfig,
+    webpackMiddleware: {
+      noInfo: true
+    },
+    browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],
+    customLaunchers: {
+      ChromeCi: {
+        base: 'Chrome',
+        flags: ['--no-sandbox'],
+      },
+    }
+  });
+};
+
