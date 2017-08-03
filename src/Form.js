@@ -118,10 +118,14 @@ class Form extends React.Component {
     return true;
   }
 
+  cleanErrors() {
+    this.setState({ errors: {} });
+  }
+
   /**
    * 验证，出现错误的回调函数
    */
-  handleFieldError(name, error, callback) {
+  handleFieldError(name, error) {
 
 
     const { onError, onCheck } = this.props;
@@ -132,21 +136,19 @@ class Form extends React.Component {
     this.setState({ errors }, () => {
       onError && onError(errors);
       onCheck && onCheck(errors);
-      callback && callback();
     });
   }
 
   /**
    * 验证通过的回调函数
    */
-  handleFieldSuccess(name, callback) {
+  handleFieldSuccess(name) {
     const { onCheck } = this.props;
     const errors = Object.assign({}, this.state.errors, {
       [name]: null
     });
     this.setState({ errors }, () => {
       onCheck && onCheck(errors);
-      callback && callback();
     });
   }
 

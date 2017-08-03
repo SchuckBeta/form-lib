@@ -40,11 +40,10 @@ class Field extends React.Component {
 
     const { name, onChange } = this.props;
     const { onFieldChange, checkTrigger } = this.context.form;
-    const checkResult = this.handleFieldCheck(value, checkTrigger === 'change', () => {
-      onFieldChange(name, value);
-      onChange && onChange(value, event);
-    });
+    const checkResult = this.handleFieldCheck(value, checkTrigger === 'change');
     this.setState({ checkResult, value });
+    onFieldChange(name, value);
+    onChange && onChange(value, event);
   }
 
   handleFieldBlur(event) {
