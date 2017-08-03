@@ -40,12 +40,11 @@ class Field extends React.Component {
 
     const { name, onChange } = this.props;
     const { onFieldChange, checkTrigger } = this.context.form;
-    const checkResult = this.handleFieldCheck(value, checkTrigger === 'change');
-
+    const checkResult = this.handleFieldCheck(value, checkTrigger === 'change', () => {
+      onFieldChange(name, value);
+      onChange && onChange(value, event);
+    });
     this.setState({ checkResult, value });
-    onFieldChange(name, value, checkResult, event);
-    onChange && onChange(value, event);
-
   }
 
   handleFieldBlur(event) {
@@ -55,7 +54,7 @@ class Field extends React.Component {
     onBlur && onBlur(event);
   }
 
-  handleFieldCheck(value, isCheckTrigger) {
+  handleFieldCheck(value, isCheckTrigger, callback) {
     const { name } = this.props;
     const {
       onFieldError,
@@ -68,9 +67,9 @@ class Field extends React.Component {
 
     if (isCheckTrigger) {
       if (checkResult.hasError) {
-        onFieldError(name, checkResult.errorMessage);
+        onFieldError(name, checkResult.errorMessage, callback);
       } else {
-        onFieldSuccess(name);
+        onFieldSuccess(name, callback);
       }
     }
 
