@@ -19,7 +19,7 @@
 `<Field>` 默认是一个 `input[type='text']` 组件， 如果需要自定义，设置一个 `accepter` 属性，
 该属性是设置需要受理的表单组件。受理的组件必须实现 `value`, `defalutValue`,`onChange` 和 `onBlur` 等 API
 
-详细的使用，查看示例代码，和 API文档。
+详细的使用，查看示例代码，和 [API文档](https://rsuitejs.com/form-lib/)。
 
 ------
 安装
