@@ -46,14 +46,15 @@ const CustomFieldForm = React.createClass({
           }}
           onCheck={errors => this.setState({ errors })}
           defaultValues={values}
-          model={model} >
+          model={model}
+        >
 
 
           <CustomField
             name="skill"
             label="技能"
             accepter={Picker}
-            error={errors['skill']}
+            error={errors.skill}
             options={[
               { label: 'Node.js', value: 1 },
               { label: 'CSS3', value: 2 },
@@ -61,7 +62,7 @@ const CustomFieldForm = React.createClass({
               { label: 'HTML5', value: 4 }
             ]}
           />
-          <Button shape='primary' onClick={this.handleSubmit}> 提交 </Button>
+          <Button shape="primary" onClick={this.handleSubmit}> 提交 </Button>
         </Form>
       </div>
     );

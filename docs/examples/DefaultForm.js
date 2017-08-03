@@ -35,10 +35,11 @@ const DefaultForm = React.createClass({
           ref={ref => this.form = ref}
           onChange={(values) => {
             this.setState({ values });
-            console.log(values, 'values');
+            if (values.status !== this.state.values.status) {
+              this.setState({ errors: {} });
+            }
           }}
           onCheck={(errors) => {
-            console.log(errors, 'errors');
             this.setState({ errors });
           }}
           values={values}
