@@ -34,10 +34,13 @@ const DefaultForm = React.createClass({
         <Form
           ref={ref => this.form = ref}
           onChange={(values) => {
+
+            console.log(values);
             this.setState({ values });
-            if (values.status !== this.state.values.status) {
-              this.setState({ errors: {} });
-            }
+
+            // 清除表单所有的错误信息
+            this.form.cleanErrors();
+
           }}
           onCheck={(errors) => {
             this.setState({ errors });
