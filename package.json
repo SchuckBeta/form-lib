@@ -1,6 +1,6 @@
 {
   "name": "form-lib",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Form component for React",
   "main": "lib/index.js",
   "scripts": {
