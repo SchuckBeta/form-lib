@@ -1,4 +1,4 @@
-/*! Last update: Sun Jul 16 2017 12:33:10 GMT+0800 (CST) */
+/*! Last update: Fri Aug 04 2017 11:01:55 GMT+0800 (CST) */
 @charset "utf-8";
 /**灰色色阶为公用颜色**/
 /**主题**/
@@ -5842,6 +5842,11 @@ fieldset[disabled] .btn {
   opacity: 0.65;
   filter: alpha(opacity=65);
 }
+.btn.disabled:after,
+.btn[disabled]:after,
+fieldset[disabled] .btn:after {
+  display: none;
+}
 a.btn.disabled,
 fieldset[disabled] a.btn {
   pointer-events: none;
@@ -6665,6 +6670,8 @@ tbody.collapse.in {
   animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
   animation-fill-mode: both;
   animation-play-state: paused;
+  max-height: 180px;
+  overflow-y: auto;
 }
 .dropdown-menu.pull-right {
   right: 0;
@@ -10902,4 +10909,12 @@ blockquote {
 .doc-highlight {
   max-height: 500px;
   overflow: auto;
+}
+fieldset {
+  padding: 10px;
+  border: 1px solid #f1f1f1;
+  margin: 10px 0;
+}
+fieldset legend {
+  border: none;
 }
