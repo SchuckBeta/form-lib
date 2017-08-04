@@ -118,7 +118,11 @@ class Form extends React.Component {
     return true;
   }
 
-  cleanErrors(errors = {}) {
+  cleanErrors() {
+    this.setState({});
+  }
+
+  resetErrors(errors = {}) {
     this.setState({ errors });
   }
 
