@@ -11,6 +11,7 @@ import DefaultForm from './examples/DefaultForm';
 import RSuiteForm from './examples/RSuiteForm';
 import CustomFieldForm from './examples/CustomFieldForm';
 import CustomCheckForm from './examples/CustomCheckForm';
+import ModalForm from './examples/ModalForm';
 
 const App = React.createClass({
 
@@ -48,6 +49,7 @@ const App = React.createClass({
                   <Nav.Item href="#RSuiteForm">RSuite 表单处理</Nav.Item>
                   <Nav.Item href="#CustomFieldForm">自定义 {'<Field>'} </Nav.Item>
                   <Nav.Item href="#CustomCheckForm">自定义触发校验 </Nav.Item>
+                  <Nav.Item href="#ModalFrom">中文输入问题 </Nav.Item>
                   <Nav.Item href="#API">API</Nav.Item>
                 </Nav>
               </Affix>
@@ -109,6 +111,21 @@ const App = React.createClass({
                   <CustomCheckForm />
                 </Col>
               </Row>
+
+              <a id="ModalFrom" className="target-fix" ></a>
+              <h2># 中文输入问题</h2>
+              <Row>
+                <Col md={12}>
+                  <p>主要测试两个问题:</p>
+                  <ul>
+                    <li>在 Modal 中 From 正常显示</li>
+                    <li>受控表单输入中文字符</li>
+                  </ul>
+                  <p>参考: <a href="https://github.com/hypers/blog/blob/master/source/_posts/react-issue.md#react-中-在-controlled受控制的文本框中输入中文-onchange-会触发多次">React 中, 在 Controlled(受控制)的文本框中输入中文 onChange 会触发多次</a></p>
+                  <ModalForm />
+                </Col>
+              </Row>
+
 
               <a id="API" className="target-fix" ></a>
               <h2># API</h2>
