@@ -50,7 +50,7 @@ function createFormControl(Component) {
       const value = e.target.value;
       // Flow check
       if (!isTextField(e.target)) {
-        onChange(value);
+        onChange(value, e);
         return;
       }
 
@@ -60,7 +60,7 @@ function createFormControl(Component) {
           inputValue: value,
           innerValue: value
         });
-        onChange(value);
+        onChange(value, e);
         isInnerChangeFromOnChange = false;
         return;
       }
@@ -72,7 +72,7 @@ function createFormControl(Component) {
           inputValue: value,
           innerValue: value,
         });
-        onChange(value);
+        onChange(value, e);
       } else {
         this.setState({ inputValue: value });
       }
@@ -94,7 +94,7 @@ function createFormControl(Component) {
         // Opera, IE and Edge is like Chrome
         if (isChrome || isIE || isEdge || isOpera) {
           this.setState({ innerValue: value });
-          onChange(value);
+          onChange(value, e);
         }
 
         // Firefox need to setState inputValue again...
@@ -103,7 +103,7 @@ function createFormControl(Component) {
             innerValue: value,
             inputValue: value
           });
-          onChange(value);
+          onChange(value, e);
         }
 
         // Safari think e.target.value in composition event is keyboard char,
