@@ -23,7 +23,7 @@ const RSuiteForm = React.createClass({
       values: {
         name: 'abc',
         skills: [2, 3],
-        gender: 1,
+        gender: 0,
         status: 0
       },
       errors: {}
@@ -87,9 +87,9 @@ const RSuiteForm = React.createClass({
             accepter={RadioGroup}
             error={errors['gender']}
           >
-            <Radio value={1}>男</Radio>
-            <Radio value={2}>女</Radio>
-            <Radio value={3}>未知</Radio>
+            <Radio value={0}>男</Radio>
+            <Radio value={1}>女</Radio>
+            <Radio value={2}>未知</Radio>
           </CustomField>
 
 
