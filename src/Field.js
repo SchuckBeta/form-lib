@@ -42,7 +42,7 @@ class Field extends React.Component {
     const { onFieldChange, checkTrigger } = this.context.form;
     const checkResult = this.handleFieldCheck(value, checkTrigger === 'change');
     this.setState({ checkResult, value });
-    onFieldChange(name, value);
+    onFieldChange(name, value, event);
     onChange && onChange(value, event);
   }
 

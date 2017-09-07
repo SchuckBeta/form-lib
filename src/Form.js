@@ -159,12 +159,12 @@ class Form extends React.Component {
   /**
    * 每一次 字段数据更新回调函数
    */
-  handleFieldChange(name, value) {
+  handleFieldChange(name, value, event) {
     const { onChange, defaultValues } = this.props;
     const values = Object.assign({}, this.state.values, defaultValues, {
       [name]: value
     });
-    onChange && onChange(values);
+    onChange && onChange(values, event);
   }
 
   render() {
