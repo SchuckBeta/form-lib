@@ -17,15 +17,19 @@ const CustomField = ({ name, label, accepter, error, ...props }) => (
   </FormGroup>
 );
 
-const CustomCheckForm = React.createClass({
-  getInitialState() {
-    return {
+
+class CustomCheckForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       values: {
         name: 'abc'
       },
       errors: {}
     };
-  },
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit() {
     const { values } = this.state;
     if (!this.form.check()) {
@@ -33,7 +37,8 @@ const CustomCheckForm = React.createClass({
       return;
     }
     console.log(values, '提交数据');
-  },
+  }
+
   render() {
     const { errors, values } = this.state;
     return (
@@ -62,6 +67,6 @@ const CustomCheckForm = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default CustomCheckForm;

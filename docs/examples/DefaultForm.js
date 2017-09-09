@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Field, createFormControl } from '../../src';
 import { SchemaModel, StringType } from 'rsuite-schema';
+import { Form, Field, createFormControl } from '../../src';
 
 const TextareaField = createFormControl('textarea');
 const SelectField = createFormControl('select');
@@ -9,16 +9,18 @@ const model = SchemaModel({
   name: StringType().isEmail('请输入正确的邮箱')
 });
 
-const DefaultForm = React.createClass({
-  getInitialState() {
-    return {
+class DefaultForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       values: {
         name: 'abc',
         status: 0
       },
       errors: {}
     };
-  },
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   handleSubmit() {
     const { values } = this.state;
     if (!this.form.check()) {
@@ -26,7 +28,7 @@ const DefaultForm = React.createClass({
       return;
     }
     console.log(values, '提交数据');
-  },
+  }
   render() {
     const { errors, values } = this.state;
     return (
@@ -34,13 +36,10 @@ const DefaultForm = React.createClass({
         <Form
           ref={ref => this.form = ref}
           onChange={(values) => {
-
             console.log(values);
             this.setState({ values });
-
             // 清除表单所有的错误信息
             this.form.cleanErrors();
-
           }}
           onCheck={(errors) => {
             this.setState({ errors });
@@ -68,12 +67,11 @@ const DefaultForm = React.createClass({
             <label>描述 </label>
             <Field name="description" className="form-control" accepter={TextareaField} />
           </div>
-
           <button onClick={this.handleSubmit}> 提交 </button>
         </Form>
       </div>
     );
   }
-});
+}
 
 export default DefaultForm;

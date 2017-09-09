@@ -27,17 +27,21 @@ const CustomField = ({ name, label, accepter, error, ...props }) => (
   </FormGroup>
 );
 
-const RSuiteForm = React.createClass({
-  getInitialState() {
-    return {
+class RSuiteForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       values: {
         name: 'abc',
         skills: [2, 3],
+        gender: 0,
         status: 0
       },
       errors: {}
     };
-  },
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit() {
     const { values } = this.state;
     if (!this.form.check()) {
@@ -45,7 +49,8 @@ const RSuiteForm = React.createClass({
       return;
     }
     console.log(values, '提交数据');
-  },
+  }
+
   render() {
     const { errors, values } = this.state;
     return (
@@ -60,19 +65,18 @@ const RSuiteForm = React.createClass({
           defaultValues={values}
           model={model} >
 
-
           <CustomField
             name="name"
             label="邮箱"
             accepter={FormControl}
-            errors={errors['name']}
+            error={errors.name}
           />
 
           <CustomField
             name="status"
             label="状态"
             accepter={FormControl}
-            errors={errors['status']}
+            error={errors.status}
             componentClass="select"
           >
             <option value={1}>启用</option>
@@ -83,7 +87,7 @@ const RSuiteForm = React.createClass({
             name="skills"
             label="技能"
             accepter={CheckboxGroup}
-            errors={errors['skills']}
+            error={errors.skills}
           >
             <Checkbox value={1}>Node.js</Checkbox>
             <Checkbox value={2}>Javascript</Checkbox>
@@ -94,11 +98,11 @@ const RSuiteForm = React.createClass({
             name="gender"
             label="性别"
             accepter={RadioGroup}
-            error={errors['gender']}
+            error={errors.gender}
           >
-            <Radio value={1}>男</Radio>
-            <Radio value={2}>女</Radio>
-            <Radio value={3}>未知</Radio>
+            <Radio value={0}>男</Radio>
+            <Radio value={1}>女</Radio>
+            <Radio value={2}>未知</Radio>
           </CustomField>
 
           <CustomField
@@ -106,15 +110,15 @@ const RSuiteForm = React.createClass({
             label="简介"
             accepter={FormControl}
             componentClass="textarea"
-            error={errors['bio']}
+            error={errors.bio}
           />
 
-          <Button shape='primary' onClick={this.handleSubmit}> 提交 </Button>
+          <Button shape="primary" onClick={this.handleSubmit}> 提交 </Button>
         </Form>
       </div>
     );
   }
-});
+}
 
 export default RSuiteForm;
 ```

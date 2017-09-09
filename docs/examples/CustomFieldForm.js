@@ -1,12 +1,12 @@
 import React from 'react';
-import { Form, Field, createFormControl } from '../../src';
 import { SchemaModel, NumberType } from 'rsuite-schema';
-import { FormControl, Button, FormGroup, ControlLabel, HelpBlock } from 'rsuite';
-import Picker from 'rsuite-picker';
+import { Button, FormGroup, ControlLabel, HelpBlock } from 'rsuite';
+import Selectpicker from 'rsuite-selectpicker';
 
+import { Form, Field } from '../../src';
 
 const model = SchemaModel({
-  skill: NumberType()
+  skill: NumberType().isRequired('该字段不能为空')
 });
 
 const CustomField = ({ name, label, accepter, error, ...props }) => (
@@ -17,15 +17,17 @@ const CustomField = ({ name, label, accepter, error, ...props }) => (
   </FormGroup>
 );
 
-const CustomFieldForm = React.createClass({
-  getInitialState() {
-    return {
+class CustomFieldForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       values: {
         skill: 3,
       },
       errors: {}
     };
-  },
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   handleSubmit() {
     const { values } = this.state;
     if (!this.form.check()) {
@@ -33,7 +35,7 @@ const CustomFieldForm = React.createClass({
       return;
     }
     console.log(values, '提交数据');
-  },
+  }
   render() {
     const { errors, values } = this.state;
     return (
@@ -53,9 +55,9 @@ const CustomFieldForm = React.createClass({
           <CustomField
             name="skill"
             label="技能"
-            accepter={Picker}
+            accepter={Selectpicker}
             error={errors.skill}
-            options={[
+            data={[
               { label: 'Node.js', value: 1 },
               { label: 'CSS3', value: 2 },
               { label: 'Javascript', value: 3 },
@@ -67,6 +69,6 @@ const CustomFieldForm = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default CustomFieldForm;

@@ -7,18 +7,18 @@
 - `onChange`: 组件数据发生改变的回调函数
 - `onBlur`: 在失去焦点的回调函数
 
-接下来我们使用 `rsuite-picker` 单选 作为示例, 在 `rsuite-picker` 内部已经实现了这些 API。
+接下来我们使用 `rsuite-selectpicker` 单选 作为示例, 在 `rsuite-selectpicker` 内部已经实现了这些 API。
 
 ```js
-import React from 'react';
-import { Form, Field, createFormControl } from 'form-lib';
-import { SchemaModel, NumberType } from 'rsuite-schema';
-import { FormControl, Button, FormGroup, ControlLabel, HelpBlock } from 'rsuite';
-import Picker from 'rsuite-picker';
 
+import React from 'react';
+import { SchemaModel, NumberType } from 'rsuite-schema';
+import { Button, FormGroup, ControlLabel, HelpBlock } from 'rsuite';
+import Selectpicker from 'rsuite-selectpicker';
+import { Form, Field } from 'form-lib';
 
 const model = SchemaModel({
-  skill: NumberType()
+  skill: NumberType().isRequired('该字段不能为空')
 });
 
 const CustomField = ({ name, label, accepter, error, ...props }) => (
@@ -29,15 +29,17 @@ const CustomField = ({ name, label, accepter, error, ...props }) => (
   </FormGroup>
 );
 
-const CustomFieldForm = React.createClass({
-  getInitialState() {
-    return {
+class CustomFieldForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       values: {
         skill: 3,
       },
       errors: {}
     };
-  },
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   handleSubmit() {
     const { values } = this.state;
     if (!this.form.check()) {
@@ -45,7 +47,7 @@ const CustomFieldForm = React.createClass({
       return;
     }
     console.log(values, '提交数据');
-  },
+  }
   render() {
     const { errors, values } = this.state;
     return (
@@ -58,27 +60,30 @@ const CustomFieldForm = React.createClass({
           }}
           onCheck={errors => this.setState({ errors })}
           defaultValues={values}
-          model={model} >
+          model={model}
+        >
 
 
           <CustomField
             name="skill"
             label="技能"
-            accepter={Picker}
-            errors={errors['skill']}
-            options={[
+            accepter={Selectpicker}
+            error={errors.skill}
+            data={[
               { label: 'Node.js', value: 1 },
               { label: 'CSS3', value: 2 },
               { label: 'Javascript', value: 3 },
               { label: 'HTML5', value: 4 }
             ]}
           />
-          <Button shape='primary' onClick={this.handleSubmit}> 提交 </Button>
+          <Button shape="primary" onClick={this.handleSubmit}> 提交 </Button>
         </Form>
       </div>
     );
   }
-});
+}
 
 export default CustomFieldForm;
+
+
 ```

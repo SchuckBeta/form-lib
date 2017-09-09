@@ -83,7 +83,7 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "rsuite": "1.1.3",
     "rsuite-affix": "^1.0.3",
-    "rsuite-picker": "^0.3.3",
+    "rsuite-selectpicker": "^1.0.0-beta.2",
     "rsuite-schema": ">=0.0.4",
     "rsuite-theme": "^0.3.35",
     "sinon": "^1.17.4",
