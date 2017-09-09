@@ -1,4 +1,4 @@
-/*! Last update: Fri Aug 04 2017 11:01:55 GMT+0800 (CST) */
+/*! Last update: Sat Sep 09 2017 17:58:13 GMT+0800 (CST) */
 @charset "utf-8";
 /**灰色色阶为公用颜色**/
 /**主题**/
@@ -38,97 +38,27 @@
     transform: scaleX(1);
   }
 }
-.rsuite-Picker {
+.rsuite-selectpicker {
   /* settings */
+}
+.rsuite-selectpicker-dropdown {
   position: relative;
   box-sizing: border-box;
   text-align: left;
 }
-.rsuite-Picker.cascade .checkList,
-.rsuite-Picker.cascade .selectList {
-  overflow: hidden;
-}
-.rsuite-Picker.cascade.expand .toggle {
-  padding: 7px 26px 7px 18px;
-}
-.rsuite-Picker.cascade.expand.rsuite-Picker--dropup .toggle {
-  border-top-width: 1px;
-  padding: 7px 26px 7px 18px;
-}
-.rsuite-Picker.cascade.expand.rsuite-Picker--dropup .toggle .toggle-arrow {
-  top: 14px;
-}
-.rsuite-Picker.cascade.expand.rsuite-Picker--dropup .selectDropdown.dropup {
-  border-top: medium none;
-}
-.rsuite-Picker.cascade .selectDropdown {
-  border: medium none;
-  width: auto;
-  min-width: auto;
-  height: 200px;
-}
-.rsuite-Picker.cascade .toggle {
-  border-bottom-width: 1px !important;
-}
-.rsuite-Picker.cascade .cascader-menu {
-  width: 120px;
-  display: inline-block;
-  height: 200px;
-  overflow-y: auto;
-  border-top: 1px solid #DCDCDC;
-  border-bottom: 1px solid #DCDCDC;
-  border-right: 1px solid #DCDCDC;
-  animation: slideLeftIn 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-.rsuite-Picker.cascade .cascader-menu:first-child {
-  border-left: 1px solid #DCDCDC;
-}
-.rsuite-Picker.cascade .cascader-menu:last-child {
-  border-right-color: #DCDCDC;
-}
-.rsuite-Picker.cascade .toggle-placeholder {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-}
-.rsuite-Picker.cascade .toggle-placeholder .label-path {
-  margin-left: 2px;
-}
-.rsuite-Picker.cascade .toggle-placeholder .label-path:after {
-  content: ">";
-  margin: 0 6px;
-}
-.rsuite-Picker.cascade .toggle-placeholder .label-path:last-child:after {
-  content: '';
-}
-.rsuite-Picker.cascade .has-children {
-  position: relative;
-}
-.rsuite-Picker.cascade .has-children .more-arrow {
-  content: '';
-  display: block;
-  position: absolute;
-  right: 6px;
-  top: 14px;
-  border-color: transparent transparent transparent #575757;
-  border-width: 4px;
-  border-style: solid;
-}
-.rsuite-Picker.disabled {
+.rsuite-selectpicker-dropdown.disabled {
   opacity: .65;
 }
-.rsuite-Picker.disabled .toggle {
+.rsuite-selectpicker-dropdown.disabled .rsuite-selectpicker-toggle {
   background: #F5F5F5 !important;
   cursor: not-allowed;
 }
-.rsuite-Picker:not(.disabled) .toggle {
+.rsuite-selectpicker-dropdown:not(.disabled) .rsuite-selectpicker-toggle {
   overflow: hidden;
   position: relative;
   transition: 'background-color .3s linear, border .0s linear';
 }
-.rsuite-Picker:not(.disabled) .toggle:after {
+.rsuite-selectpicker-dropdown:not(.disabled) .rsuite-selectpicker-toggle:after {
   content: "";
   display: block;
   position: absolute;
@@ -144,12 +74,12 @@
   opacity: 0;
   transition: transform .5s, opacity 1s;
 }
-.rsuite-Picker:not(.disabled) .toggle:active:after {
+.rsuite-selectpicker-dropdown:not(.disabled) .rsuite-selectpicker-toggle:active:after {
   transform: scale(0);
   opacity: .2;
   transition: 0s;
 }
-.rsuite-Picker:not(.disabled) .toggle:not(.disabled):after {
+.rsuite-selectpicker-dropdown:not(.disabled) .rsuite-selectpicker-toggle:not(.disabled):after {
   content: "";
   display: block;
   position: absolute;
@@ -165,114 +95,74 @@
   opacity: 0;
   transition: transform .5s, opacity 1s;
 }
-.rsuite-Picker:not(.disabled) .toggle:not(.disabled):active:after {
+.rsuite-selectpicker-dropdown:not(.disabled) .rsuite-selectpicker-toggle:not(.disabled):active:after {
   transform: scale(0);
   opacity: .2;
   transition: 0s;
 }
-.rsuite-Picker .toggle {
-  position: relative;
-  overflow: hidden;
-  background-color: #FFF;
-  color: #333;
-  border: 1px solid #CCC;
-  padding: 7px 26px 7px 18px;
-  cursor: pointer;
-  outline: none;
-  width: 100%;
-  text-align: left;
-}
-.rsuite-Picker .toggle-placeholder {
-  white-space: nowrap;
-  margin-right: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 22px;
-}
-.rsuite-Picker .toggle .toggle-arrow {
-  content: '';
-  display: block;
-  position: absolute;
-  right: 17px;
-  top: 14px;
-  border-color: #575757 transparent transparent;
-  border-width: 4px 4px 0;
-  border-style: solid;
-}
-.rsuite-Picker.expand .toggle {
+.rsuite-selectpicker-dropdown.expand .rsuite-selectpicker-toggle {
   z-index: 101;
   background: #FFF !important;
   border-color: #DCDCDC !important;
   border-bottom-width: 0;
   padding: 7px 26px 8px 18px;
 }
-.rsuite-Picker.expand.rsuite-Picker--dropup .toggle {
+.rsuite-selectpicker-dropdown.expand.rsuite-selectpicker-dropup .rsuite-selectpicker-toggle {
   border-top-width: 0;
   border-bottom-width: 1px;
   padding: 8px 26px 7px 18px;
 }
-.rsuite-Picker.expand.rsuite-Picker--dropup .toggle-arrow {
+.rsuite-selectpicker-dropdown.expand.rsuite-selectpicker-dropup .rsuite-selectpicker-toggle-arrow {
   top: 15px;
+  border-color: transparent transparent #575757;
+  border-width: 4px;
 }
-.rsuite-Picker.inverse .toggle {
-  border-color: #f5f5f5;
-  background-color: #f5f5f5;
+.rsuite-selectpicker-dropdown.expand .rsuite-selectpicker-toggle-arrow {
+  border-color: #575757 transparent transparent;
+  border-width: 4px 4px 0;
 }
-.rsuite-Picker.inverse .toggle:hover {
-  background-color: #E8E8E8;
-}
-.rsuite-Picker.inverse .toggle-placeholder {
-  color: #575757;
-}
-.rsuite-Picker .selectList,
-.rsuite-Picker .checkList {
+.rsuite-selectpicker-dropdown-menu {
   overflow: auto;
+  padding-top: 6px;
 }
-.rsuite-Picker .selectList:before,
-.rsuite-Picker .checkList:before,
-.rsuite-Picker .selectList:after,
-.rsuite-Picker .checkList:after {
+.rsuite-selectpicker-dropdown-menu ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.rsuite-selectpicker-dropdown-menu:before,
+.rsuite-selectpicker-dropdown-menu:after {
   content: " ";
   display: table;
 }
-.rsuite-Picker .selectList:after,
-.rsuite-Picker .checkList:after {
+.rsuite-selectpicker-dropdown-menu:after {
   clear: both;
 }
-.rsuite-Picker .selectList:before,
-.rsuite-Picker .checkList:before,
-.rsuite-Picker .selectList:after,
-.rsuite-Picker .checkList:after {
+.rsuite-selectpicker-dropdown-menu:before,
+.rsuite-selectpicker-dropdown-menu:after {
   content: " ";
   display: table;
 }
-.rsuite-Picker .selectList:after,
-.rsuite-Picker .checkList:after {
+.rsuite-selectpicker-dropdown-menu:after {
   clear: both;
 }
-.rsuite-Picker .selectList:before,
-.rsuite-Picker .checkList:before,
-.rsuite-Picker .selectList:after,
-.rsuite-Picker .checkList:after {
+.rsuite-selectpicker-dropdown-menu:before,
+.rsuite-selectpicker-dropdown-menu:after {
   content: " ";
   display: table;
 }
-.rsuite-Picker .selectList:after,
-.rsuite-Picker .checkList:after {
+.rsuite-selectpicker-dropdown-menu:after {
   clear: both;
 }
-.rsuite-Picker .selectList:before,
-.rsuite-Picker .checkList:before,
-.rsuite-Picker .selectList:after,
-.rsuite-Picker .checkList:after {
+.rsuite-selectpicker-dropdown-menu:before,
+.rsuite-selectpicker-dropdown-menu:after {
   content: " ";
   display: table;
 }
-.rsuite-Picker .selectList:after,
-.rsuite-Picker .checkList:after {
+.rsuite-selectpicker-dropdown-menu:after {
   clear: both;
 }
-.rsuite-Picker .selectDropdown {
+.rsuite-selectpicker-dropdown .dropdown {
   -moz-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.28);
   -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.28);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.28);
@@ -287,7 +177,7 @@
   width: 100%;
   animation: slideUpIn 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
-.rsuite-Picker .selectDropdown.dropup {
+.rsuite-selectpicker-dropdown .dropdown.menu-dropup {
   top: auto;
   left: 0;
   bottom: 37px;
@@ -297,43 +187,10 @@
   box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.175);
   animation: slideDownIn 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
-.rsuite-Picker .selectDropdown .tree-node {
-  position: relative;
-}
-.rsuite-Picker .selectDropdown .tree-node.open > .node-children {
-  display: block;
-}
-.rsuite-Picker .selectDropdown .tree-node.open > .node-hasChildren .expand-icon:before {
-  content: "\F0D7";
-}
-.rsuite-Picker .selectDropdown .tree-node .node-children {
-  display: none;
-}
-.rsuite-Picker .selectDropdown .tree-node .selectOption {
-  padding: 6px;
-}
-.rsuite-Picker .selectDropdown .tree-node .expand-icon {
-  width: 18px;
-  height: 18px;
-  text-align: center;
-  cursor: pointer;
-  position: absolute;
-  margin-left: -20px;
-  top: 8px;
-}
-.rsuite-Picker .selectDropdown .tree-node .expand-icon:before {
-  content: "\F0DA";
-}
-.rsuite-Picker .selectDropdown .selectList .tree-node .item.active {
-  background: #004889;
-}
-.rsuite-Picker .selectDropdown .selectList .tree-node .item.active .expand-icon {
-  color: #fff;
-}
-.rsuite-Picker .searchBar {
+.rsuite-selectpicker-dropdown .search-bar {
   padding: 6px 10px;
 }
-.rsuite-Picker .searchBar-input {
+.rsuite-selectpicker-dropdown .search-bar-input {
   display: block;
   padding: 4px;
   border: 1px solid #CCC;
@@ -341,7 +198,7 @@
   width: 100%;
   outline: none;
 }
-.rsuite-Picker .selectOption {
+.rsuite-selectpicker-dropdown .menu-item {
   padding: 6px 10px;
   cursor: pointer;
   white-space: nowrap;
@@ -351,42 +208,49 @@
   text-decoration: none;
   transition: background-color 0.3s linear, color, 0.2s, ease-in;
 }
-.rsuite-Picker .selectOption label {
+.rsuite-selectpicker-dropdown .menu-item label {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
-.rsuite-Picker .selectOption.disabled {
+.rsuite-selectpicker-dropdown .menu-item.disabled {
   color: #8F8F8F;
+  cursor: not-allowed;
 }
-.rsuite-Picker .selectOption.disabled:hover,
-.rsuite-Picker .selectOption.disabled:focus {
+.rsuite-selectpicker-dropdown .menu-item.disabled:hover,
+.rsuite-selectpicker-dropdown .menu-item.disabled:focus {
   color: #8F8F8F;
   background: none;
 }
-.rsuite-Picker .selectOption:hover,
-.rsuite-Picker .selectOption:focus,
-.rsuite-Picker .selectOption.hover {
+.rsuite-selectpicker-dropdown .menu-item:hover,
+.rsuite-selectpicker-dropdown .menu-item:focus {
   background-color: #e6edf3;
   color: #575757;
 }
-.rsuite-Picker .selectOption.active {
+.rsuite-selectpicker-dropdown .menu-item.hover {
+  box-shadow: 0px 0px 2px #002445;
+  background-color: #e6edf3;
+  border-collapse: separate;
+}
+.rsuite-selectpicker-dropdown .menu-item.active {
   background-color: #004889;
   color: #FFF;
 }
-.rsuite-Picker .selectGroup {
+.rsuite-selectpicker-dropdown .menu-item-group {
   margin-top: 2px;
   border-bottom: 1px solid #F5F5F5;
 }
-.rsuite-Picker .selectGroup .selectGroup-title {
+.rsuite-selectpicker-dropdown .menu-item-group .menu-item-group-title {
   position: relative;
   font-weight: bold;
   color: #000;
   padding: 8px 10px 6px;
+  outline: none;
+  cursor: pointer;
 }
-.rsuite-Picker .selectGroup .selectGroup-title .arrow {
+.rsuite-selectpicker-dropdown .menu-item-group .menu-item-group-title .arrow {
   content: '';
   display: block;
   position: absolute;
@@ -395,95 +259,64 @@
   border-color: #575757 transparent transparent;
   border-width: 4px 4px 0;
   border-style: solid;
+  transition: border 200ms;
 }
-.rsuite-Picker .selectGroup.shrink .arrow {
+.rsuite-selectpicker-dropdown .menu-item-group.closed .arrow {
   border-color: transparent #575757 transparent transparent;
   border-width: 4px;
 }
-.rsuite-Picker .selectGroup.shrink .selectOption {
+.rsuite-selectpicker-dropdown .menu-item-group.closed .menu-item-group-children {
   display: none;
 }
-.rsuite-Picker.TreePicker .item:hover {
-  background: #e6edf3;
-}
-.rsuite-Picker.TreePicker .selectDropdown {
-  width: auto;
-  min-width: 100%;
-}
-.rsuite-Picker.TreePicker .checkList,
-.rsuite-Picker.TreePicker .selectList {
-  min-width: 100%;
-}
-.rsuite-Picker.TreePicker.onlyOneLayer .checkList > .selectOption,
-.rsuite-Picker.TreePicker.onlyOneLayer .selectList > .selectOption {
-  margin-left: -12px;
-}
-.rsuite-CheckListPicker {
-  /* settings */
-}
-.rsuite-CheckListPicker .checkItem {
+.rsuite-selectpicker-toggle {
   position: relative;
-  padding: 6px 10px;
-  cursor: pointer;
-  transition: background-color 0.3s linear, color, 0.2s, ease-in;
-}
-.rsuite-CheckListPicker .checkItem:hover {
-  background-color: #e6edf3;
-  color: #575757;
-}
-.rsuite-CheckListPicker .checkItem.disabled .checkItem-label::before {
-  background: #eee;
-}
-.rsuite-CheckListPicker .checkItem.checked .checkItem-label::after {
-  opacity: 1;
-  filter: alpha(opacity=100);
-  transform: scale(1);
-}
-.rsuite-CheckListPicker .checkItem .checkItem-checkbox {
-  position: absolute;
-  z-index: -1;
-}
-.rsuite-CheckListPicker .checkItem .checkItem-label {
-  display: block;
-  position: relative;
-  margin-bottom: 0;
-  padding-left: 2em;
-  outline: 0;
-  cursor: pointer;
-}
-.rsuite-CheckListPicker .checkItem .checkItem-label::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 17px;
-  height: 17px;
-  background: #FFF;
+  overflow: hidden;
+  background-color: #FFF;
+  color: #333;
   border: 1px solid #CCC;
-}
-.rsuite-CheckListPicker .checkItem .checkItem-label::after {
-  font-family: RSuiteIconFont;
-  content: "\F00C";
-  color: #004889;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 17px;
-  height: 17px;
-  text-align: center;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  transform: scale(0);
-  transition: all 0.3s linear, transform 0.2s cubic-bezier(0, 0, 0.2, 1);
-}
-.rsuite-CheckListPicker .btnClear {
-  padding: 6px 10px;
-  display: block;
+  padding: 7px 26px 7px 18px;
   cursor: pointer;
+  outline: none;
+  width: 100%;
+  text-align: left;
 }
-.rsuite-CheckListPicker hr {
-  margin-bottom: 16px;
-  margin-top: 0;
+.rsuite-selectpicker-toggle .placeholder-text {
+  opacity: .4;
+}
+.rsuite-selectpicker-toggle-placeholder {
+  white-space: nowrap;
+  margin-right: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 22px;
+}
+.rsuite-selectpicker-toggle:hover .rsuite-selectpicker-toggle-clean {
+  opacity: 1;
+}
+.rsuite-selectpicker-toggle-arrow {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 17px;
+  top: 14px;
+  border-style: solid;
+  border-color: transparent #575757 transparent transparent;
+  border-width: 4px;
+  transition: border 200ms;
+}
+.rsuite-selectpicker-toggle-clean {
+  position: absolute;
+  opacity: 0;
+  top: 50%;
+  right: 8px;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  outline: none;
+  text-align: center;
+  margin-top: -10px;
+  background: #fff;
+  transition: all 0.15s;
 }
 html {
   font-family: sans-serif;
