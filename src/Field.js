@@ -7,6 +7,7 @@ const propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
+  checkTrigger: PropTypes.oneOf(['change', 'blur', null]),
   accepter: elementType
 };
 
@@ -35,11 +36,16 @@ class Field extends React.Component {
     this.handleFieldCheck = this.handleFieldCheck.bind(this);
   }
 
+  getCheckTrigger() {
+    const { checkTrigger } = this.context.form;
+    return this.props.checkTrigger || checkTrigger;
+  }
 
   handleFieldChange(value, event) {
 
     const { name, onChange } = this.props;
-    const { onFieldChange, checkTrigger } = this.context.form;
+    const { onFieldChange } = this.context.form;
+    const checkTrigger = this.getCheckTrigger();
     const checkResult = this.handleFieldCheck(value, checkTrigger === 'change');
     this.setState({ checkResult, value });
     onFieldChange(name, value, event);
@@ -48,7 +54,7 @@ class Field extends React.Component {
 
   handleFieldBlur(event) {
     const { onBlur } = this.props;
-    const { checkTrigger } = this.context.form;
+    const checkTrigger = this.getCheckTrigger();
     this.handleFieldCheck(this.state.value, checkTrigger === 'blur');
     onBlur && onBlur(event);
   }
