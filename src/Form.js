@@ -92,7 +92,7 @@ class Form extends React.Component {
    * 该方法主要提供给 Form ref 时候调用
    * return  true/false
    */
-  check() {
+  check(callback) {
     const { values } = this.state;
     const { defaultValues, model, onCheck, onError } = this.props;
     const errors = {};
@@ -110,6 +110,7 @@ class Form extends React.Component {
 
     this.setState({ errors });
     onCheck && onCheck(errors);
+    callback && callback(errors);
     if (errorCount > 0) {
       onError && onError(errors);
       return false;
