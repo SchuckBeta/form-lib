@@ -4,7 +4,6 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import { SchemaModel, StringType } from 'rsuite-schema';
 import Form from '../src/Form';
 import Field from '../src/Field';
-import createFormControl from '../src/createFormControl';
 
 const checkEmail = '请输入正确的邮箱';
 const model = SchemaModel({
@@ -76,6 +75,73 @@ describe('Form', () => {
     assert.equal(element.querySelector('input[name="name"]').value, values.name);
     assert.equal(element.querySelector('input[name="email"]').value, values.email);
   });
+
+
+  it('Should be `false` for check status', () => {
+    const values = {
+      name: 'abc'
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Form
+        model={model}
+        defaultValues={values}
+      >
+        <Field name="name" />
+      </Form>
+    );
+    assert.equal(instance.check(), false);
+  });
+
+  it('Should be `true` for check status', () => {
+    const values = {
+      name: 'abc@gmail.com'
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Form
+        model={model}
+        defaultValues={values}
+      >
+        <Field name="name" />
+      </Form>
+    );
+    assert.equal(instance.check(), true);
+  });
+
+  it('Should be {} for errors when call cleanErrors', () => {
+    const values = {
+      name: 'abc.com'
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Form
+        model={model}
+        defaultValues={values}
+      >
+        <Field name="name" />
+      </Form>
+    );
+    instance.check();
+    instance.cleanErrors(() => {
+      assert.equal(Object.keys(instance.state.errors).length, 0);
+    });
+  });
+
+  it('Should be {name:"error"} for errors when call resetErrors', () => {
+    const values = {
+      name: 'abc.com'
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Form
+        model={model}
+        defaultValues={values}
+      >
+        <Field name="name" />
+      </Form>
+    );
+    instance.resetErrors({ name: 'error' }, () => {
+      assert.equal(instance.state.errors.name, 'error');
+    });
+  });
+
 
   it('Should call onChange callback', (done) => {
 
