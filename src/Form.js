@@ -119,12 +119,12 @@ class Form extends React.Component {
     return true;
   }
 
-  cleanErrors() {
-    this.setState({});
+  cleanErrors(callback) {
+    this.setState({ errors: {} }, callback);
   }
 
-  resetErrors(errors = {}) {
-    this.setState({ errors });
+  resetErrors(errors = {}, callback) {
+    this.setState({ errors }, callback);
   }
 
   /**

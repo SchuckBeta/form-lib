@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import elementType from './utils/elementType';
+import elementType from 'rsuite-utils/lib/propTypes/elementType';
 import createFormControl from './createFormControl';
 
 const propTypes = {

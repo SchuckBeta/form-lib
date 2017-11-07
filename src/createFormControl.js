@@ -78,6 +78,7 @@ function createFormControl(Component) {
       }
     }
 
+    /* istanbul ignore next */
     handleComposition(e) {
 
       const { onChange = () => { } } = this.props;
