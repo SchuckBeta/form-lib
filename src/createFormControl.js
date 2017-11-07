@@ -17,6 +17,7 @@ function createFormControl(Component) {
   let isInnerChangeFromOnChange = false;
 
   const propTypes = {
+    /*eslint-disable */
     value: PropTypes.any,
     defaultValue: PropTypes.any,
     onChange: PropTypes.func

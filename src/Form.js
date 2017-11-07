@@ -7,6 +7,7 @@ import classNames from 'classnames';
 const propTypes = {
   horizontal: PropTypes.bool,
   inline: PropTypes.bool,
+   /*eslint-disable */
   values: PropTypes.object,
   defaultValues: PropTypes.object,
   model: PropTypes.instanceOf(Schema),
