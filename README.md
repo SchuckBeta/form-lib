@@ -12,6 +12,7 @@
   <Field />
 </Form>
 ```
+
 `<Form>` 提供了 `values` 和 `defaultValues` 为整个表单设置值，对应的分别是受控和非受控表单。
 同时提供了 `onChange` (数据发生改变时候触发) 和 `onCheck` (数据校验时候触发) 事件。
 
@@ -19,11 +20,18 @@
 `<Field>` 默认是一个 `input[type='text']` 组件， 如果需要自定义，设置一个 `accepter` 属性，
 该属性是设置需要受理的表单组件。受理的组件必须实现 `value`, `defalutValue`,`onChange` 和 `onBlur` 等 API
 
-详细的使用，查看示例代码，和 [API文档](https://rsuitejs.com/form-lib/)。
-
 ------
-安装
+## 快速开始
+
+### 安装
 
 ```
-npm install form-lib --save
+npm i form-lib --save
 ```
+
+安装 `rsuite-schema`
+
+```
+npm i rsuite-schema --save
+```
+

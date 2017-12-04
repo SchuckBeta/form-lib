@@ -1,13 +1,9 @@
-使用原生的表单元素时候，需要一个 `createFormControl` 函数创建一个表单组件，主要是重写组件的 `onChange` 方法，返回组件的值，而不是 `event` 对象。
 
-数据校验使用 `rsuite-schema`。
+### 默认表单
 
+
+<!--start-code-->
 ```js
-
-import React from 'react';
-import { Form, Field, createFormControl } from 'form-lib';
-import { SchemaModel, StringType } from 'rsuite-schema';
-
 const TextareaField = createFormControl('textarea');
 const SelectField = createFormControl('select');
 
@@ -80,7 +76,11 @@ class DefaultForm extends React.Component {
   }
 }
 
-export default DefaultForm;
+ReactDOM.render(<DefaultForm />);
 
 ```
+<!--end-code-->
 
+使用原生的表单元素时候，需要一个 `createFormControl` 函数创建一个表单组件，主要是重写组件的 `onChange` 方法，返回组件的值，而不是 `event` 对象。
+
+数据校验使用 `rsuite-schema`。

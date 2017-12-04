@@ -1,22 +1,7 @@
-如果一个组件不是原生表单控件，也不是 `RSuite` 库中提供的基础组件，要在 `form-lib` 中使用，应该怎么处理呢？
+### 自定义 `Field`
 
-只需要在写这个组件的时候实现对应的 API 就可以了，
-
-- `value` : 受控时候设置的值
-- `defalutValue`: 默认值，非受控情况先设置的值
-- `onChange`: 组件数据发生改变的回调函数
-- `onBlur`: 在失去焦点的回调函数
-
-接下来我们使用 `rsuite-selectpicker` 单选 作为示例, 在 `rsuite-selectpicker` 内部已经实现了这些 API。
-
+<!--start-code-->
 ```js
-
-import React from 'react';
-import { SchemaModel, NumberType } from 'rsuite-schema';
-import { Button, FormGroup, ControlLabel, HelpBlock } from 'rsuite';
-import Selectpicker from 'rsuite-selectpicker';
-import { Form, Field } from 'form-lib';
-
 const model = SchemaModel({
   skill: NumberType().isRequired('该字段不能为空')
 });
@@ -83,7 +68,19 @@ class CustomFieldForm extends React.Component {
   }
 }
 
-export default CustomFieldForm;
-
+ReactDOM.render(<CustomFieldForm />);
 
 ```
+<!--end-code-->
+
+如果一个组件不是原生表单控件，也不是 `RSuite` 库中提供的基础组件，要在 `form-lib` 中使用，应该怎么处理呢？
+
+只需要在写这个组件的时候实现对应的 API 就可以了，
+
+- `value` : 受控时候设置的值
+- `defalutValue`: 默认值，非受控情况先设置的值
+- `onChange`: 组件数据发生改变的回调函数
+- `onBlur`: 在失去焦点的回调函数
+
+接下来我们使用 `rsuite-selectpicker` 单选 作为示例, 在 `rsuite-selectpicker` 内部已经实现了这些 API。
+

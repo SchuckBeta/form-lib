@@ -1,8 +1,7 @@
-import React from 'react';
-import { SchemaModel, StringType } from 'rsuite-schema';
-import { Modal, Button } from 'rsuite';
-import { Form, Field, createFormControl } from '../../src';
+### 中文输入问题
 
+<!--start-code-->
+```js
 const TextareaField = createFormControl('textarea');
 
 const model = SchemaModel({
@@ -110,4 +109,7 @@ class ModalForm extends React.Component {
   }
 }
 
-export default ModalForm;
+ReactDOM.render(<ModalForm />);
+
+```
+<!--end-code-->

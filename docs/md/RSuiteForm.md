@@ -1,25 +1,13 @@
-用 RSuite 提供的表单组件
-- `<FormGroup>` 控制布局，同时在有错误的情况下，需要添加一个 `has-error` 的 `className`;
-- `<ControlLabel>` 配置显示的字段名称;
-- `<HelpBlock>` 配置错误信息；
-- 把 RSuite 的表单组件 配置到 `<Field>` 的 `accepter` 属性上面。
+### RSUITE 表单处理
 
+<!--start-code-->
 ```js
-
-import React from 'react';
-import { Form, Field, createFormControl } from 'form-lib';
-import { SchemaModel, StringType, ArrayType } from 'rsuite-schema';
-import {
-  FormControl, Button, FormGroup,
-  ControlLabel, HelpBlock, CheckboxGroup, Checkbox
-} from 'rsuite';
-
 const model = SchemaModel({
   name: StringType().isEmail('请输入正确的邮箱'),
   skills: ArrayType().minLength(1, '至少应该会一个技能')
 });
 
-const CustomField = ({ name, label, accepter, error, ...props }) => (
+const CustomField = ({ name, label, accepter, error, ...props }) =>(
   <FormGroup className={error ? 'has-error' : ''}>
     <ControlLabel>{label} </ControlLabel>
     <Field name={name} accepter={accepter} {...props} />
@@ -120,13 +108,24 @@ class RSuiteForm extends React.Component {
   }
 }
 
-export default RSuiteForm;
+ReactDOM.render(<RSuiteForm />);
+
 ```
-<br/>
+<!--end-code-->
+
+
+
+用 RSuite 提供的表单组件
+- `<FormGroup>` 控制布局，同时在有错误的情况下，需要添加一个 `has-error` 的 `className`;
+- `<ControlLabel>` 配置显示的字段名称;
+- `<HelpBlock>` 配置错误信息；
+- 把 RSuite 的表单组件 配置到 `<Field>` 的 `accepter` 属性上面。
+
+
 > `FormGroup` 中有很多重复的配置项，所以可以创建一个 `CustomField` 组件。
 
 ```js
-const CustomField = ({ name, label, accepter, error, ...props }) => (
+const CustomField = ({ name, label, accepter, error, ...props }) =>(
   <FormGroup className={error ? 'has-error' : ''}>
     <ControlLabel>{label} </ControlLabel>
     <Field name={name} accepter={accepter} {...props} />
