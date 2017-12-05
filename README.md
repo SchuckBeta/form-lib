@@ -4,6 +4,12 @@
 
 [rsuite-schema API 文档](https://rsuitejs.com/components/schema)
 
+版本与状态
+
+[![npm][npm-badge]][npm] [![Travis][build-badge]][build]
+
+
+
 `form-lib` 中主要提供了两个组件: `<Form>` 和 `<Field>`,  `<Field>` 必须包含在 `<Form>` 内，例如:
 
 ```html
@@ -34,4 +40,13 @@ npm i form-lib --save
 ```
 npm i rsuite-schema --save
 ```
+
+
+
+[npm-badge]: https://img.shields.io/npm/v/form-lib/version2.x.svg?style=flat-square
+[npm]: https://www.npmjs.com/package/form-lib
+
+
+[build-badge]: https://img.shields.io/badge/build-passing-green.svg?style=flat-square
+[build]: https://travis-ci.org/rsuite/form-lib
 

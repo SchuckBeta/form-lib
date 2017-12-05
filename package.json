@@ -1,6 +1,6 @@
 {
   "name": "form-lib",
-  "version": "0.1.4",
+  "version": "2.0.0",
   "description": "Form component for React",
   "main": "lib/index.js",
   "scripts": {
@@ -91,7 +91,7 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "react-markdown-reader": "^1.0.1",
     "rsuite": "1.1.3",
-    "rsuite-docs": "^0.1.11",
+    "rsuite-docs": "^0.2.2",
     "rsuite-schema": ">=0.0.4",
     "rsuite-selectpicker": "^1.0.1",
     "rsuite-theme": "^2.0.16",
