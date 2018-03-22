@@ -60,7 +60,9 @@ class Form extends React.Component {
   }
   getChildContext() {
     const { defaultValues, model, checkTrigger } = this.props;
-    const { errors, values } = this.state;
+    const values = this.getValues();
+    const errors = this.getErrors();
+
     return {
       form: {
         onFieldChange: this.handleFieldChange,
@@ -75,31 +77,30 @@ class Form extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!_.isEqual(nextProps.errors, this.props.errors)) {
-      this.setState({
-        errors: nextProps.errors
-      });
-    }
-
-    if (!_.isEqual(nextProps.values, this.props.values)) {
-      this.setState({
-        values: nextProps.values
-      });
-    }
+  getErrors(){
+    const { errors } = this.props;
+    return typeof errors === 'undefined' ? this.state.errors : errors;
   }
+
+  getValues(){
+    const { values } = this.props;
+    return typeof values === 'undefined' ? this.state.values : values;
+  }
+
   /**
    * 校验表单数据是否合法
    * 该方法主要提供给 Form ref 时候调用
    * return  true/false
    */
   check(callback) {
-    const { values } = this.state;
+    const values = this.getValues();
     const { defaultValues, model, onCheck, onError } = this.props;
     const errors = {};
     let errorCount = 0;
 
     const nextValues = Object.assign({}, defaultValues, values);
+
+
     Object.keys(model.schema).forEach((key) => {
       const checkResult = model.checkForField(key, nextValues[key]);
 

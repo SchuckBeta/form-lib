@@ -50,7 +50,7 @@ class RSuiteForm extends React.Component {
             console.log(values);
           }}
           onCheck={errors => this.setState({ errors })}
-          defaultValues={values}
+          values={values}
           model={model} >
 
           <CustomField
@@ -100,6 +100,7 @@ class RSuiteForm extends React.Component {
             componentClass="textarea"
             error={errors.bio}
           />
+
 
           <Button shape="primary" onClick={this.handleSubmit}> 提交 </Button>
         </Form>

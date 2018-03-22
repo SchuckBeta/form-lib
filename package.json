@@ -1,6 +1,6 @@
 {
   "name": "form-lib",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Form component for React",
   "main": "lib/index.js",
   "scripts": {
@@ -29,6 +29,7 @@
   },
   "files": [
     "CHANGELOG.md",
+    "src",
     "lib"
   ],
   "homepage": "https://github.com/rsuite/form-lib#readme",
