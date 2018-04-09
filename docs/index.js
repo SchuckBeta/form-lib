@@ -115,6 +115,7 @@ const App = React.createClass({
           dependencies={{
             Form,
             Field,
+            FormControl,
             createFormControl,
             SchemaModel,
             StringType,
