@@ -51,7 +51,7 @@ class Form extends React.Component {
        * 默认会设置 props.values ，
        * 如果还是没有的话就默认为 {}
        */
-      values: props.values || {}
+      values: props.defaultValues || {}
     };
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleFieldError = _.debounce(this.handleFieldError.bind(this), props.checkDelay);
@@ -163,11 +163,17 @@ class Form extends React.Component {
    * 每一次 字段数据更新回调函数
    */
   handleFieldChange(name, value, event) {
-    const { onChange, defaultValues } = this.props;
-    const values = Object.assign({}, this.state.values, defaultValues, {
+    const { onChange } = this.props;
+    const values = this.getValues();
+    const nextValues = Object.assign({}, values, {
       [name]: value
     });
-    onChange && onChange(values, event);
+
+    this.setState({
+      values: nextValues
+    });
+
+    onChange && onChange(nextValues, event);
   }
 
   render() {
