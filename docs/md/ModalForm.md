@@ -13,10 +13,6 @@ class FormContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      values: {
-        name: 'abc',
-        status: 0
-      },
       inputValue: '',
       errors: {}
     };
@@ -53,14 +49,11 @@ class FormContent extends React.Component {
           <legend>form-lib 中的 Field</legend>
           <Form
             ref={ref => (this.form = ref)}
-            onChange={values => {
-              this.setState({ values });
-              console.log(values);
-            }}
+            onChange={this.props.onChange}
             onCheck={errors => {
               this.setState({ errors });
             }}
-            values={values}
+            values={this.props.formValue}
             model={model}
           >
             <div className="form-group">
@@ -86,10 +79,15 @@ class ModalContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      formValue: {
+        name: 'abc',
+        description: 'vvvv'
+      }
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   handleSubmit() {
     const { values } = this.state;
@@ -108,23 +106,27 @@ class ModalContainer extends React.Component {
     this.setState({ showModal: true });
   }
 
+  handleChange(formValue) {
+    this.setState({
+      formValue
+    });
+  }
+
   render() {
     const { showModal } = this.state;
+
     return (
       <div>
         <Button shape="default" onClick={this.handleOpen}>
           打开
         </Button>
 
-        <Modal
-          show={showModal}
-          onHide={this.handleClose}
-        >
+        <Modal show={showModal} onHide={this.handleClose}>
           <Modal.Header>
             <Modal.Title> 测试中文输入问题</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormContent />
+            <FormContent formValue={this.state.formValue} onChange={this.handleChange} />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose} shape="default">
