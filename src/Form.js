@@ -7,7 +7,7 @@ import classNames from 'classnames';
 const propTypes = {
   horizontal: PropTypes.bool,
   inline: PropTypes.bool,
-   /*eslint-disable */
+  /*eslint-disable */
   values: PropTypes.object,
   defaultValues: PropTypes.object,
   model: PropTypes.instanceOf(Schema),
@@ -39,9 +39,7 @@ const defaultProps = {
   checkTrigger: 'change'
 };
 
-
 class Form extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -59,8 +57,7 @@ class Form extends React.Component {
     this.check = this.check.bind(this);
   }
   getChildContext() {
-    const { defaultValues, model, checkTrigger } = this.props;
-    const values = this.getValues();
+    const { defaultValues, values, model, checkTrigger } = this.props;
     const errors = this.getErrors();
 
     return {
@@ -77,12 +74,12 @@ class Form extends React.Component {
     };
   }
 
-  getErrors(){
+  getErrors() {
     const { errors } = this.props;
     return typeof errors === 'undefined' ? this.state.errors : errors;
   }
 
-  getValues(){
+  getValues() {
     const { values } = this.props;
     return typeof values === 'undefined' ? this.state.values : values;
   }
@@ -100,8 +97,7 @@ class Form extends React.Component {
 
     const nextValues = Object.assign({}, defaultValues, values);
 
-
-    Object.keys(model.schema).forEach((key) => {
+    Object.keys(model.schema).forEach(key => {
       const checkResult = model.checkForField(key, nextValues[key]);
 
       if (checkResult.hasError === true) {
@@ -133,8 +129,6 @@ class Form extends React.Component {
    * 验证，出现错误的回调函数
    */
   handleFieldError(name, error) {
-
-
     const { onError, onCheck } = this.props;
     const errors = Object.assign({}, this.state.errors, {
       [name]: error
@@ -169,33 +163,33 @@ class Form extends React.Component {
       [name]: value
     });
 
-    this.setState({
-      values: nextValues
-    });
+    if (typeof this.props.values === 'undefined') {
+      this.setState({
+        values: nextValues
+      });
+    }
 
     onChange && onChange(nextValues, event);
   }
 
   render() {
+    const { horizontal, inline, className, ...props } = this.props;
 
-    const {
-      horizontal,
-      inline,
-      className,
-      ...props
-    } = this.props;
-
-    const clesses = classNames('form', {
-      'form-horizontal': horizontal,
-      'form-inline': inline
-    }, className);
+    const clesses = classNames(
+      'form',
+      {
+        'form-horizontal': horizontal,
+        'form-inline': inline
+      },
+      className
+    );
 
     const elementProps = _.omit(props, Object.keys(propTypes));
 
     return (
       <form
         {...elementProps}
-        onSubmit={(e) => {
+        onSubmit={e => {
           e.preventDefault();
         }}
         className={clesses}

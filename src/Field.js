@@ -16,13 +16,11 @@ const defaultProps = {
 };
 
 class Field extends React.Component {
-
   constructor(props, context) {
     super(props, context);
     if (!context.form) {
       throw new Error('Field must be inside a component decorated with <Form>');
     }
-
 
     const { values = {}, defaultValues = {} } = context.form;
     const name = props.name;
@@ -42,12 +40,15 @@ class Field extends React.Component {
   }
 
   handleFieldChange(value, event) {
-
     const { name, onChange } = this.props;
-    const { onFieldChange } = this.context.form;
+    const { onFieldChange, values } = this.context.form;
     const checkTrigger = this.getCheckTrigger();
     const checkResult = this.handleFieldCheck(value, checkTrigger === 'change');
-    this.setState({ checkResult, value });
+
+    if (values && typeof values[name] === 'undefined') {
+      this.setState({ checkResult, value });
+    }
+
     onFieldChange(name, value, event);
     onChange && onChange(value, event);
   }
@@ -61,20 +62,15 @@ class Field extends React.Component {
 
   handleFieldCheck(value, isCheckTrigger, callback) {
     const { name } = this.props;
-    const {
-      onFieldError,
-      onFieldSuccess,
-      model
-    } = this.context.form;
-
+    const { onFieldError, onFieldSuccess, model } = this.context.form;
 
     const checkResult = model.checkForField(name, value);
 
     if (isCheckTrigger) {
       if (checkResult.hasError) {
-        onFieldError(name, checkResult.errorMessage, callback);
+        onFieldError && onFieldError(name, checkResult.errorMessage, callback);
       } else {
-        onFieldSuccess(name, callback);
+        onFieldSuccess && onFieldSuccess(name, callback);
       }
     }
 
@@ -82,9 +78,8 @@ class Field extends React.Component {
   }
 
   render() {
-    let { name, accepter: Component, ...props } = this.props;
+    const { name, accepter: Component, ...props } = this.props;
     const { values = {}, defaultValues = {} } = this.context.form;
-
     return (
       <Component
         {...props}
