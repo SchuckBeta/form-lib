@@ -39,6 +39,17 @@ class Field extends React.Component {
     return this.props.checkTrigger || checkTrigger;
   }
 
+  getValue() {
+    const { values } = this.context.form;
+    const { name } = this.props;
+
+    if (values && typeof values[name] !== 'undefined') {
+      return values[name];
+    }
+
+    return this.state.value;
+  }
+
   handleFieldChange(value, event) {
     const { name, onChange } = this.props;
     const { onFieldChange, values } = this.context.form;
@@ -56,7 +67,7 @@ class Field extends React.Component {
   handleFieldBlur(event) {
     const { onBlur } = this.props;
     const checkTrigger = this.getCheckTrigger();
-    this.handleFieldCheck(this.state.value, checkTrigger === 'blur');
+    this.handleFieldCheck(this.getValue(), checkTrigger === 'blur');
     onBlur && onBlur(event);
   }
 
