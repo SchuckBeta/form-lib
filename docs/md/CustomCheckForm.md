@@ -51,9 +51,10 @@ class CustomCheckForm extends React.Component {
             console.log(values);
           }}
           onCheck={errors => {
+
             this.setState({ errors });
           }}
-          defaultValues={values}
+          values={values}
           model={model}
           checkTrigger="blur"
         >
